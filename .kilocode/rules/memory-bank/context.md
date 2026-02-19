@@ -19,6 +19,7 @@ The template has been expanded into a modern project dashboard application with 
 - [x] Task cards with priority badges, tags, and assignee avatars
 - [x] Stats bar with progress ring and task counts
 - [x] Search bar and Add Task button in header
+- [x] Functional search bar — filters tasks by title or assignee in real-time
 - [x] Dark theme with violet accent color
 - [x] Custom scrollbar styling
 - [x] Drag-and-drop task movement between columns (HTML5 DnD API)
@@ -91,3 +92,4 @@ Create files in `src/app/[route]/page.tsx` and update sidebar navigation.
 | 2026-02-19 | Built project dashboard with sidebar, task board, status columns, task cards, stats bar |
 | 2026-02-19 | Added drag-and-drop between columns with live stats updates and visual feedback |
 | 2026-02-19 | Added light/dark mode toggle with ThemeProvider, localStorage persistence, and CSS custom properties |
+| 2026-02-19 | Wired up search bar to filter tasks by name or assignee using useMemo |
