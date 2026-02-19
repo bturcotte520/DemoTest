@@ -28,6 +28,8 @@ The template has been expanded into a modern project dashboard application with 
 - [x] DashboardContent client component for interactive state
 - [x] Light mode/dark mode toggle with localStorage persistence
 - [x] ThemeProvider client component for theme context
+- [x] /credits page with QR code linking to https://kilo.codes/devWeek (react-qr-code)
+- [x] Fixed ThemeProvider lint error — replaced setState-in-effect with lazy useState initializer
 - [x] CSS custom properties for theming (--bg-primary, --bg-secondary, --text-primary, --text-secondary, --border-color, --accent)
 - [x] Toggle button with sun/moon icons in header
 
@@ -46,6 +48,7 @@ The template has been expanded into a modern project dashboard application with 
 | `src/components/sections/TaskBoard.tsx` | Board layout with state management (client) | ✅ Ready |
 | `src/components/sections/DashboardContent.tsx` | Main content with live stats (client) | ✅ Ready |
 | `src/components/providers/ThemeProvider.tsx` | Theme context provider (client component) | ✅ Ready |
+| `src/app/credits/page.tsx` | Credits page with QR code (react-qr-code) | ✅ Ready |
 | `.kilocode/` | AI context & recipes | ✅ Ready |
 
 ## Current Focus
@@ -93,3 +96,4 @@ Create files in `src/app/[route]/page.tsx` and update sidebar navigation.
 | 2026-02-19 | Added drag-and-drop between columns with live stats updates and visual feedback |
 | 2026-02-19 | Added light/dark mode toggle with ThemeProvider, localStorage persistence, and CSS custom properties |
 | 2026-02-19 | Wired up search bar to filter tasks by name or assignee using useMemo |
+| 2026-02-19 | Added /credits page with react-qr-code QR code linking to https://kilo.codes/devWeek; fixed ThemeProvider lint error |
