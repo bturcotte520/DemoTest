@@ -2,6 +2,7 @@
 
 import { Task } from "@/lib/types";
 import { DragEvent } from "react";
+import { useTheme } from "@/components/providers/ThemeProvider";
 
 const priorityConfig = {
   high: { label: "High", className: "bg-red-500/15 text-red-400" },
@@ -51,7 +52,21 @@ function getInitials(name: string) {
 }
 
 export default function TaskCard({ task }: { task: Task }) {
+  const { theme } = useTheme();
   const priority = priorityConfig[task.priority];
+
+  // Theme-aware classes
+  const cardBg = theme === "dark" ? "bg-neutral-800/50" : "bg-white";
+  const cardBorder = theme === "dark" ? "border-neutral-700/50" : "border-neutral-200";
+  const cardHoverBorder = theme === "dark" ? "hover:border-neutral-600/50" : "hover:border-violet-300";
+  const cardHoverBg = theme === "dark" ? "hover:shadow-black/20" : "hover:shadow-gray-200/50";
+  const titleColor = theme === "dark" ? "text-neutral-100" : "text-neutral-800";
+  const titleHover = theme === "dark" ? "group-hover:text-white" : "group-hover:text-violet-600";
+  const descColor = theme === "dark" ? "text-neutral-400" : "text-neutral-500";
+  const assigneeColor = theme === "dark" ? "text-neutral-500" : "text-neutral-500";
+  const idColor = theme === "dark" ? "text-neutral-600" : "text-neutral-400";
+  const emptyBorder = theme === "dark" ? "border-neutral-600" : "border-neutral-300";
+  const emptyIcon = theme === "dark" ? "text-neutral-600" : "text-neutral-400";
 
   function handleDragStart(e: DragEvent<HTMLDivElement>) {
     e.dataTransfer.setData("text/plain", task.id);
@@ -72,7 +87,7 @@ export default function TaskCard({ task }: { task: Task }) {
       draggable
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
-      className="bg-neutral-800/50 border border-neutral-700/50 rounded-xl p-4 hover:border-neutral-600/50 transition-all hover:shadow-lg hover:shadow-black/20 group cursor-grab active:cursor-grabbing"
+      className={`${cardBg} border ${cardBorder} ${cardHoverBorder} rounded-xl p-4 hover:border-violet-500/30 transition-all hover:shadow-lg ${cardHoverBg} group cursor-grab active:cursor-grabbing`}
     >
       {/* Priority & Tags */}
       <div className="flex items-center gap-2 flex-wrap mb-3">
@@ -90,13 +105,13 @@ export default function TaskCard({ task }: { task: Task }) {
       </div>
 
       {/* Title */}
-      <h3 className="text-sm font-semibold text-neutral-100 mb-1 group-hover:text-white transition-colors">
+      <h3 className={`text-sm font-semibold ${titleColor} mb-1 ${titleHover} transition-colors`}>
         {task.title}
       </h3>
 
       {/* Description */}
       {task.description && (
-        <p className="text-xs text-neutral-400 mb-3 line-clamp-2 leading-relaxed">
+        <p className={`text-xs ${descColor} mb-3 line-clamp-2 leading-relaxed`}>
           {task.description}
         </p>
       )}
@@ -110,16 +125,16 @@ export default function TaskCard({ task }: { task: Task }) {
             >
               {getInitials(task.assignee)}
             </div>
-            <span className="text-xs text-neutral-500">{task.assignee}</span>
+            <span className={`text-xs ${assigneeColor}`}>{task.assignee}</span>
           </div>
         ) : (
-          <div className="w-6 h-6 rounded-full border-2 border-dashed border-neutral-600 flex items-center justify-center">
-            <svg className="w-3 h-3 text-neutral-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <div className={`w-6 h-6 rounded-full border-2 border-dashed ${emptyBorder} flex items-center justify-center`}>
+            <svg className={`w-3 h-3 ${emptyIcon}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
           </div>
         )}
-        <span className="text-[11px] text-neutral-600">#{task.id}</span>
+        <span className={`text-[11px] ${idColor}`}>#{task.id}</span>
       </div>
     </div>
   );
