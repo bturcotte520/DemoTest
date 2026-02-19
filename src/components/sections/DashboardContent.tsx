@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import TaskBoard from "@/components/sections/TaskBoard";
 import { useTheme } from "@/components/providers/ThemeProvider";
 import { Task, TaskStatus } from "@/lib/types";
@@ -12,6 +12,17 @@ export default function DashboardContent({
 }) {
   const [tasks, setTasks] = useState<Task[]>(project.tasks);
   const { theme, toggleTheme } = useTheme();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredTasks = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    if (!query) return tasks;
+    return tasks.filter(
+      (task) =>
+        task.title.toLowerCase().includes(query) ||
+        (task.assignee && task.assignee.toLowerCase().includes(query)),
+    );
+  }, [tasks, searchQuery]);
 
   const totalTasks = tasks.length;
   const doneTasks = tasks.filter((t) => t.status === "done").length;
@@ -57,8 +68,10 @@ export default function DashboardContent({
             </svg>
             <input
               type="text"
-              placeholder="Search tasks..."
-              className={`${searchBg} ${searchBorder} rounded-lg pl-9 pr-4 py-2 text-sm ${searchText} placeholder:text-neutral-500 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/25 w-64 transition-colors`}
+              placeholder="Search by name or assignee..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className={`${searchBg} border ${searchBorder} rounded-lg pl-9 pr-4 py-2 text-sm ${searchText} placeholder:text-neutral-500 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/25 w-64 transition-colors`}
             />
           </div>
           
@@ -147,7 +160,7 @@ export default function DashboardContent({
 
       {/* Task Board */}
       <div className="flex-1 p-8">
-        <TaskBoard tasks={tasks} onMoveTask={handleMoveTask} />
+        <TaskBoard tasks={filteredTasks} onMoveTask={handleMoveTask} />
       </div>
     </main>
   );
