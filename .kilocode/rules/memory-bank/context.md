@@ -2,7 +2,7 @@
 
 ## Current State
 
-**Template Status**: 🚀 Project Dashboard App with Light/Dark Mode
+**Template Status**: 🚀 Project Dashboard App with Light/Dark Mode + Credits Page
 
 The template has been expanded into a modern project dashboard application with a sidebar navigation, task board with status columns (To Do, In Progress, Done), task cards with priority/tags/assignees, a stats bar showing progress, drag-and-drop to move tasks between columns, and **light mode/dark mode toggle** with localStorage persistence.
 

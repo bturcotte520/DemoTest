@@ -87,9 +87,10 @@ export const sampleProject: Project = {
 };
 
 export const navItems = [
-  { label: "Dashboard", icon: "grid", active: true },
-  { label: "Projects", icon: "folder" },
-  { label: "Calendar", icon: "calendar" },
-  { label: "Team", icon: "users" },
-  { label: "Settings", icon: "settings" },
+  { label: "Dashboard", icon: "grid", active: true, href: "/" },
+  { label: "Projects", icon: "folder", href: "/projects" },
+  { label: "Calendar", icon: "calendar", href: "/calendar" },
+  { label: "Team", icon: "users", href: "/team" },
+  { label: "Settings", icon: "settings", href: "/settings" },
+  { label: "Credits", icon: "credits", href: "/credits" },
 ];
