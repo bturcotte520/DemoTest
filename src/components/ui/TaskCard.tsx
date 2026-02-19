@@ -1,4 +1,7 @@
+"use client";
+
 import { Task } from "@/lib/types";
+import { DragEvent } from "react";
 
 const priorityConfig = {
   high: { label: "High", className: "bg-red-500/15 text-red-400" },
@@ -50,8 +53,27 @@ function getInitials(name: string) {
 export default function TaskCard({ task }: { task: Task }) {
   const priority = priorityConfig[task.priority];
 
+  function handleDragStart(e: DragEvent<HTMLDivElement>) {
+    e.dataTransfer.setData("text/plain", task.id);
+    e.dataTransfer.effectAllowed = "move";
+    // Add a slight delay so the drag image captures before opacity change
+    const target = e.currentTarget;
+    requestAnimationFrame(() => {
+      target.style.opacity = "0.4";
+    });
+  }
+
+  function handleDragEnd(e: DragEvent<HTMLDivElement>) {
+    e.currentTarget.style.opacity = "1";
+  }
+
   return (
-    <div className="bg-neutral-800/50 border border-neutral-700/50 rounded-xl p-4 hover:border-neutral-600/50 transition-all hover:shadow-lg hover:shadow-black/20 group cursor-pointer">
+    <div
+      draggable
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      className="bg-neutral-800/50 border border-neutral-700/50 rounded-xl p-4 hover:border-neutral-600/50 transition-all hover:shadow-lg hover:shadow-black/20 group cursor-grab active:cursor-grabbing"
+    >
       {/* Priority & Tags */}
       <div className="flex items-center gap-2 flex-wrap mb-3">
         <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${priority.className}`}>

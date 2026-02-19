@@ -2,9 +2,9 @@
 
 ## Current State
 
-**Template Status**: 🚀 Project Dashboard App Built
+**Template Status**: 🚀 Project Dashboard App with Drag-and-Drop
 
-The template has been expanded into a modern project dashboard application with a sidebar navigation, task board with status columns (To Do, In Progress, Done), task cards with priority/tags/assignees, and a stats bar showing progress.
+The template has been expanded into a modern project dashboard application with a sidebar navigation, task board with status columns (To Do, In Progress, Done), task cards with priority/tags/assignees, a stats bar showing progress, and **drag-and-drop** to move tasks between columns.
 
 ## Recently Completed
 
@@ -21,37 +21,38 @@ The template has been expanded into a modern project dashboard application with 
 - [x] Search bar and Add Task button in header
 - [x] Dark theme with violet accent color
 - [x] Custom scrollbar styling
+- [x] Drag-and-drop task movement between columns (HTML5 DnD API)
+- [x] Live stats updates when tasks are moved
+- [x] Visual drop zone feedback (ring highlight, pulse animation)
+- [x] DashboardContent client component for interactive state
 
 ## Current Structure
 
 | File/Directory | Purpose | Status |
 |----------------|---------|--------|
-| `src/app/page.tsx` | Dashboard page with sidebar + task board | ✅ Ready |
+| `src/app/page.tsx` | Dashboard page with sidebar + DashboardContent | ✅ Ready |
 | `src/app/layout.tsx` | Root layout with Taskflow branding | ✅ Ready |
 | `src/app/globals.css` | Global styles + custom scrollbar | ✅ Ready |
 | `src/lib/types.ts` | TypeScript types (Task, Project, etc.) | ✅ Ready |
 | `src/lib/data.ts` | Sample project data and nav items | ✅ Ready |
 | `src/components/layout/Sidebar.tsx` | Sidebar with nav, logo, user profile | ✅ Ready |
-| `src/components/ui/TaskCard.tsx` | Task card with priority, tags, assignee | ✅ Ready |
-| `src/components/ui/TaskColumn.tsx` | Status column with header and cards | ✅ Ready |
-| `src/components/sections/TaskBoard.tsx` | Board layout with 3 columns | ✅ Ready |
+| `src/components/ui/TaskCard.tsx` | Draggable task card (client component) | ✅ Ready |
+| `src/components/ui/TaskColumn.tsx` | Drop-target status column (client component) | ✅ Ready |
+| `src/components/sections/TaskBoard.tsx` | Board layout with state management (client) | ✅ Ready |
+| `src/components/sections/DashboardContent.tsx` | Main content with live stats (client) | ✅ Ready |
 | `.kilocode/` | AI context & recipes | ✅ Ready |
 
 ## Current Focus
 
-The dashboard is built with sample data. Potential next steps:
+The dashboard has drag-and-drop working. Potential next steps:
 
-1. Add interactivity (drag-and-drop, add/edit/delete tasks)
+1. Add task CRUD (add, edit, delete tasks)
 2. Add database persistence (use add-database recipe)
 3. Add more pages (Projects list, Calendar, Team, Settings)
 4. Add responsive/mobile layout
 5. Add task detail modal
 
 ## Quick Start Guide
-
-### To add interactivity:
-
-Convert components to client components with `"use client"` and add state management for task CRUD operations.
 
 ### To add a database:
 
@@ -69,7 +70,6 @@ Create files in `src/app/[route]/page.tsx` and update sidebar navigation.
 
 ## Pending Improvements
 
-- [ ] Drag-and-drop task reordering
 - [ ] Task CRUD operations (add, edit, delete)
 - [ ] Database persistence
 - [ ] Responsive/mobile layout
@@ -84,3 +84,4 @@ Create files in `src/app/[route]/page.tsx` and update sidebar navigation.
 |------|---------|
 | Initial | Template created with base setup |
 | 2026-02-19 | Built project dashboard with sidebar, task board, status columns, task cards, stats bar |
+| 2026-02-19 | Added drag-and-drop between columns with live stats updates and visual feedback |
