@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import TaskBoard from "@/components/sections/TaskBoard";
-import { Task } from "@/lib/types";
+import { Task, TaskStatus } from "@/lib/types";
 
 export default function DashboardContent({
   project,
@@ -17,8 +17,12 @@ export default function DashboardContent({
   const todoTasks = totalTasks - doneTasks - inProgressTasks;
   const progressPercent = totalTasks > 0 ? Math.round((doneTasks / totalTasks) * 100) : 0;
 
-  const handleTasksChange = useCallback((updatedTasks: Task[]) => {
-    setTasks(updatedTasks);
+  const handleMoveTask = useCallback((taskId: string, newStatus: TaskStatus) => {
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === taskId ? { ...task, status: newStatus } : task,
+      ),
+    );
   }, []);
 
   return (
@@ -109,7 +113,7 @@ export default function DashboardContent({
 
       {/* Task Board */}
       <div className="flex-1 p-8">
-        <TaskBoard initialTasks={tasks} onTasksChange={handleTasksChange} />
+        <TaskBoard tasks={tasks} onMoveTask={handleMoveTask} />
       </div>
     </main>
   );

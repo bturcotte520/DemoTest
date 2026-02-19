@@ -1,31 +1,23 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { Task, TaskStatus } from "@/lib/types";
 import TaskColumn from "@/components/ui/TaskColumn";
 
 const columns: TaskStatus[] = ["todo", "in-progress", "done"];
 
 export default function TaskBoard({
-  initialTasks,
-  onTasksChange,
+  tasks,
+  onMoveTask,
 }: {
-  initialTasks: Task[];
-  onTasksChange?: (tasks: Task[]) => void;
+  tasks: Task[];
+  onMoveTask: (taskId: string, newStatus: TaskStatus) => void;
 }) {
-  const [tasks, setTasks] = useState<Task[]>(initialTasks);
-
-  const handleMoveTask = useCallback(
+  const handleDrop = useCallback(
     (taskId: string, newStatus: TaskStatus) => {
-      setTasks((prev) => {
-        const updated = prev.map((task) =>
-          task.id === taskId ? { ...task, status: newStatus } : task,
-        );
-        onTasksChange?.(updated);
-        return updated;
-      });
+      onMoveTask(taskId, newStatus);
     },
-    [onTasksChange],
+    [onMoveTask],
   );
 
   const tasksByStatus = columns.reduce(
@@ -43,7 +35,7 @@ export default function TaskBoard({
           key={status}
           status={status}
           tasks={tasksByStatus[status]}
-          onDrop={handleMoveTask}
+          onDrop={handleDrop}
         />
       ))}
     </div>
