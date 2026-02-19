@@ -2,9 +2,9 @@
 
 ## Current State
 
-**Template Status**: 🚀 Project Dashboard App with Drag-and-Drop
+**Template Status**: 🚀 Project Dashboard App with Light/Dark Mode
 
-The template has been expanded into a modern project dashboard application with a sidebar navigation, task board with status columns (To Do, In Progress, Done), task cards with priority/tags/assignees, a stats bar showing progress, and **drag-and-drop** to move tasks between columns.
+The template has been expanded into a modern project dashboard application with a sidebar navigation, task board with status columns (To Do, In Progress, Done), task cards with priority/tags/assignees, a stats bar showing progress, drag-and-drop to move tasks between columns, and **light mode/dark mode toggle** with localStorage persistence.
 
 ## Recently Completed
 
@@ -25,6 +25,10 @@ The template has been expanded into a modern project dashboard application with 
 - [x] Live stats updates when tasks are moved
 - [x] Visual drop zone feedback (ring highlight, pulse animation)
 - [x] DashboardContent client component for interactive state
+- [x] Light mode/dark mode toggle with localStorage persistence
+- [x] ThemeProvider client component for theme context
+- [x] CSS custom properties for theming (--bg-primary, --bg-secondary, --text-primary, --text-secondary, --border-color, --accent)
+- [x] Toggle button with sun/moon icons in header
 
 ## Current Structure
 
@@ -32,7 +36,7 @@ The template has been expanded into a modern project dashboard application with 
 |----------------|---------|--------|
 | `src/app/page.tsx` | Dashboard page with sidebar + DashboardContent | ✅ Ready |
 | `src/app/layout.tsx` | Root layout with Taskflow branding | ✅ Ready |
-| `src/app/globals.css` | Global styles + custom scrollbar | ✅ Ready |
+| `src/app/globals.css` | Global styles + custom scrollbar + theme variables | ✅ Ready |
 | `src/lib/types.ts` | TypeScript types (Task, Project, etc.) | ✅ Ready |
 | `src/lib/data.ts` | Sample project data and nav items | ✅ Ready |
 | `src/components/layout/Sidebar.tsx` | Sidebar with nav, logo, user profile | ✅ Ready |
@@ -40,11 +44,12 @@ The template has been expanded into a modern project dashboard application with 
 | `src/components/ui/TaskColumn.tsx` | Drop-target status column (client component) | ✅ Ready |
 | `src/components/sections/TaskBoard.tsx` | Board layout with state management (client) | ✅ Ready |
 | `src/components/sections/DashboardContent.tsx` | Main content with live stats (client) | ✅ Ready |
+| `src/components/providers/ThemeProvider.tsx` | Theme context provider (client component) | ✅ Ready |
 | `.kilocode/` | AI context & recipes | ✅ Ready |
 
 ## Current Focus
 
-The dashboard has drag-and-drop working. Potential next steps:
+The dashboard has drag-and-drop and theme toggle working. Potential next steps:
 
 1. Add task CRUD (add, edit, delete tasks)
 2. Add database persistence (use add-database recipe)
@@ -85,3 +90,4 @@ Create files in `src/app/[route]/page.tsx` and update sidebar navigation.
 | Initial | Template created with base setup |
 | 2026-02-19 | Built project dashboard with sidebar, task board, status columns, task cards, stats bar |
 | 2026-02-19 | Added drag-and-drop between columns with live stats updates and visual feedback |
+| 2026-02-19 | Added light/dark mode toggle with ThemeProvider, localStorage persistence, and CSS custom properties |
