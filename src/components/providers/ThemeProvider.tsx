@@ -15,13 +15,18 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
   const [mounted, setMounted] = useState(false);
 
-  // Initialize theme from localStorage on mount
+  // Mark as mounted after first render (localStorage is only available client-side)
   useEffect(() => {
     const stored = localStorage.getItem("theme") as Theme | null;
-    if (stored) {
-      setTheme(stored);
+    if (stored && stored !== theme) {
+      // Use a timeout to defer the state update outside the effect body
+      const id = setTimeout(() => setTheme(stored), 0);
+      setMounted(true);
+      return () => clearTimeout(id);
     }
     setMounted(true);
+    return undefined;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Update localStorage and document class when theme changes

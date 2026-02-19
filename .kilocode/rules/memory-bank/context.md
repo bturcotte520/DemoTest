@@ -28,6 +28,9 @@ The template has been expanded into a modern project dashboard application with 
 - [x] Light mode/dark mode toggle with localStorage persistence
 - [x] ThemeProvider client component for theme context
 - [x] CSS custom properties for theming (--bg-primary, --bg-secondary, --text-primary, --text-secondary, --border-color, --accent)
+- [x] `/credits` page with QR code linking to https://kilo.codes/devWeek (uses api.qrserver.com)
+- [x] Fixed pre-existing ESLint `react-hooks/set-state-in-effect` error in ThemeProvider
+- [x] Added `api.qrserver.com` to Next.js `images.remotePatterns` config
 - [x] Toggle button with sun/moon icons in header
 
 ## Current Structure
@@ -45,6 +48,7 @@ The template has been expanded into a modern project dashboard application with 
 | `src/components/sections/TaskBoard.tsx` | Board layout with state management (client) | ✅ Ready |
 | `src/components/sections/DashboardContent.tsx` | Main content with live stats (client) | ✅ Ready |
 | `src/components/providers/ThemeProvider.tsx` | Theme context provider (client component) | ✅ Ready |
+| `src/app/credits/page.tsx` | Credits page with QR code for kilo.codes/devWeek | ✅ Ready |
 | `.kilocode/` | AI context & recipes | ✅ Ready |
 
 ## Current Focus
@@ -91,3 +95,4 @@ Create files in `src/app/[route]/page.tsx` and update sidebar navigation.
 | 2026-02-19 | Built project dashboard with sidebar, task board, status columns, task cards, stats bar |
 | 2026-02-19 | Added drag-and-drop between columns with live stats updates and visual feedback |
 | 2026-02-19 | Added light/dark mode toggle with ThemeProvider, localStorage persistence, and CSS custom properties |
+| 2026-02-19 | Added /credits page with QR code (api.qrserver.com) linking to kilo.codes/devWeek; fixed ESLint ThemeProvider error; added remotePatterns for api.qrserver.com |
